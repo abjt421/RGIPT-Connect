@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>restaurants</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f3f5;
+            background-image: url(https://img.freepik.com/free-vector/damask-seamless-pattern-background_1217-751.jpg?w=740&t=st=1713947226~exp=1713947826~hmac=26d188da4b7037a4b836a9366433c42cd457049549524a38414c0d0df8155ad4);
+            position: relative;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar {
+            background-color: #001f3f;
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: auto;
+            padding-left: 20px;
+        }
+
+        .search-box {
+            flex-grow: 1;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #searchInput {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            flex: 1;
+            margin-right: 10px;
+            width: 80%; /* Updated width */
+            max-width: 400px; /* Updated max-width */
+        }
+
+        #searchButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #f39c12;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #searchButton:hover {
+            background-color: #e67e22; /* Added hover effect */
+        }
+
+        .suggestions {
+            position: absolute;
+            top: calc(100% + 5px);
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            max-width: calc(100% - 40px);
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1000;
+        }
+
+        .suggestions a {
+            display: block;
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .suggestions a:hover {
+            background-color: #f5f5f5;
+        }
+
+        .hamburger-menu {
+            font-size: 24px;
+            cursor: pointer;
+            margin-left: auto;
+            padding-right: 20px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #001f3f;
+            min-width: 160px;
+            z-index: 1;
+            top: 40px;
+            right: 0;
+            padding: 10px;
+            border-radius: 20px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 8px 12px;
+            display: block;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f39c12;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .category-options {
+            color: white;
+            font-weight: 800;
+            font-size: 22px;
+            padding-top: 80px;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .category {
+            width: 80%; /* Changed width */
+            margin-bottom: 20px;
+            border-radius: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            max-width: 1200px; /* Added max-width */
+            margin-top: 2rem;
+            background-image: url(des.jpg);
+        }
+
+        .category:hover {
+            transform: translateY(-10px);
+            background-color: #f8f9fa;
+        }
+
+        .category h2 {
+            margin-top: 0;
+            padding: 20px 0 0 0;
+        }
+
+        .outlets {
+            padding: 0 20px 20px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .outlet-container {
+            display: flex;
+            margin: auto;
+            flex-wrap: wrap;
+            width: 100%;
+            margin-right: 1.5rem;
+            justify-content: center; /* Optional: Adjust the alignment */
+        }
+
+        .outlet {
+            width: 30%;
+            margin-right: 2%;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .outlet:hover {
+            transform: translateY(-5px);
+        }
+
+        .outlet img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .outlet button {
+            width: 100%;
+            background-color: #f39c12;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .outlet button:hover {
+            background-color: #e67e22;
+        }
+
+        .outlet button:focus {
+            outline: none;
+        }
+
+        .footer {
+            background-color: #001f3f;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            position: bottom; /* Change position to absolute */
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Adjusted homepage icon */
+        .homepage-icon {
+            font-size: 40px; /* Increased font size */
+            color: #f39c12;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        .recommendation-button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .recommendation-button:hover {
+            background-color: #e67e22;
+        }
+
+        /* Added rule for home button opacity on hover */
+        .homepage-icon:hover {
+            opacity: 0.7; /* Adjust the opacity value as needed */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="welcome.html" class="homepage-icon">&#8962;</a>
+            <div class="logo">RGIPT Connect</div>
+            <div class="search-box">
+                <input id="searchInput" type="text" placeholder="Search...">
+                <button id="searchButton" type="button">Search</button>
+                <div id="suggestionList" class="suggestions"></div>
+            </div>
+            <div class="dropdown">
+                <div class="hamburger-menu">&#9776;</div>
+                <div class="dropdown-content">
+                    <a href="about_us.html">About Us</a>
+                    <a href="mailto:22mc3001@rgipt.ac.in">Feedback</a>
+                    <a href="#" id="logoutLink">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="category-options">
+        <div class="category">
+            <h1>Restaurants</h1>
+            <div class="outlets">
+                <div class="outlet-container">
+                    <!-- Add 20 outlets here -->
+                    <!-- Outlet 1 -->
+                    <div class="outlet">
+                        <button onclick="window.location.href='rest1.html';">
+                            <img src="https://lh3.googleusercontent.com/p/AF1QipP1o5GuLHsnHCzXfUc_4vKNk6ma8JluqJ9Ox0Qw=s1360-w1360-h1020" alt="Restaurant 1">
+                            Moti Mahal Delux
+                        </button>
+                    </div>
+                    <!-- Outlet 2 -->
+                    <div class="outlet">
+                        <button onclick="window.location.href='rest2.html';">
+                            <img src="https://lh3.googleusercontent.com/p/AF1QipPw_1XlyctLephwaU1p2-q84FFV6vWXK-9qLrw5=s1360-w1360-h1020" alt="Restaurant 2">
+                            Chawla's Family Theme Restaurant
+                        </button>
+                    </div>
+                    <!-- 3 -->
+                    <div class="outlet">
+                        <button onclick="window.location.href='rest3.html';">
+                            <img src="https://lh3.googleusercontent.com/p/AF1QipP-7B_JmzuZzsgKugW6vUGez0PUc6K01C6lrtBB=s1360-w1360-h1020" alt="Restaurant 3">
+                            Om Family Restaurant
+                        </button>
+                    </div>
+                    <!-- 4 -->
+                    <div class="outlet">
+                        <button onclick="window.location.href='rest4.html';">
+                            <img src="https://lh3.googleusercontent.com/p/AF1QipNdvXEvp9gcAY8evsdR7h0NMpP3KTCAQBRxgc55=s1360-w1360-h1020" alt="Restaurant 2">
+                            Naina Resort
+                        </button>
+                    </div>
+                    <!-- 5 -->
+                    <div class="outlet">
+                        <button onclick="window.location.href='rest5.html';">
+                            <img src="https://lh3.googleusercontent.com/p/AF1QipOhRUY4LgMNwn0V0TMpJllkA1c53SotmM6pYC9R=s1360-w1360-h1020" alt="Restaurant 2">
+                            The Bridge
+                        </button>
+                    </div>
+                    <!-- 6 -->
+                    <div class="outlet">
+                        <button onclick="window.location.href='rest6.html';">
+                            <img src="https://lh3.googleusercontent.com/p/AF1QipM_88wGtw9C9AIjLlVkiwNOJwJGeWxqXHbe1wM9=s1360-w1360-h1020" alt="Restaurant 2">
+                            Iqbal Hotel , Raebareli
+                        </button>
+                    </div>
+                    <!-- 7 -->
+                    <div class="outlet">
+                        <button onclick="window.location.href='rest7.html';">
+                            <img src="https://lh3.googleusercontent.com/p/AF1QipPTJ3hyLlFaaAy6uElAaG-pjt59rX9_b90pi-dV=s1360-w1360-h1020" alt="Restaurant 2">
+                            Food Plaza
+                        </button>
+                    </div>
+                    <!-- 8 -->
+                    <div class="outlet">
+                        <button onclick="window.location.href='rest8.html';">
+                            <img src="https://lh3.googleusercontent.com/p/AF1QipOdnzAhNYJfD1xvMOeQQ8L9qAD5ooqgaK6B4Yyb=s1360-w1360-h1020" alt="Restaurant 2">
+                            Kaidi Kitchen Restaurant
+                        </button>
+                    </div>
+                    <!-- 9 -->
+                    <div class="outlet">
+                        <button onclick="window.location.href='rest9.html';">
+                            <img src="https://lh3.googleusercontent.com/p/AF1QipMneBSFptwpgSia92Rd8wqilWEXY0q6FpZJH_4_=s1360-w1360-h1020" alt="Restaurant 2">
+                            Shri Brijwasi Restaurant, Civil lines, Raebareli
+                        </button>
+                    </div>
+                    <!-- 10 -->
+                    <div class="outlet">
+                        <button onclick="window.location.href='rest10.html';">
+                            <img src="https://lh3.googleusercontent.com/p/AF1QipOEY_fqunptkbfs9L_eM0H-74RqeW6oIITuiFq6=s1360-w1360-h1020" alt="Restaurant 2">
+                            O Cafe & Restaurant
+                        </button>
+                    </div>
+                    <!-- 11 -->
+                    <div class="outlet">
+                        <button onclick="window.location.href='rest11.html';">
+                            <img src="https://lh3.googleusercontent.com/p/AF1QipMw9nl95PT8nR6mIc1AkaN7XVi7ZGl-omRBmJG7=s1360-w1360-h1020" alt="Restaurant 2">
+                            The Sapphire
+                        </button>
+                    </div>
+                    <!-- 12 -->
+                    <div class="outlet">
+                        <button onclick="window.location.href='rest12.html';">
+                            <img src="https://lh3.googleusercontent.com/p/AF1QipOIVxZF8Q5d36Olt-TPLYqjiVzl8Anyrspp9l60=s1360-w1360-h1020" alt="Restaurant 2">
+                            Clique Restaurant
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="recommendation-button"><a href="https://forms.gle/2f8nAohCGmNnY5FU8" style="text-decoration: none; color: inherit;">Add Your Recommendations</a></button>
+
+    <div class="footer">
+        &copy; 2024 RGIPT Connect. All rights reserved.
+    </div>
+
+    <script>
+        // Function to handle search functionality
+        document.getElementById("searchButton").addEventListener("click", function() {
+            const searchTerm = document.getElementById("searchInput").value;
+            // Placeholder functionality - You can replace this with actual search functionality
+            alert(`Searching for "${searchTerm}"...`);
+        });
+    </script>
+    <!--Write Above-->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>
+
+    <script src="firebase.js"></script>
+    <script src="welcome.js"></script>
+    <script src="search.js"></script>
+</body>
+</html>
