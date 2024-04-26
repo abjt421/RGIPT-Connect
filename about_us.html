@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f3f5;
+            background-image: url(https://img.freepik.com/free-vector/damask-seamless-pattern-background_1217-751.jpg?w=740&t=st=1713947226~exp=1713947826~hmac=26d188da4b7037a4b836a9366433c42cd457049549524a38414c0d0df8155ad4);
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar {
+            background-color: #001f3f;
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: auto;
+            padding-left: 20px;
+        }
+
+        .search-box {
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .search-box input[type="text"] {
+            padding: 8px;
+            border: none;
+            border-radius: 8px;
+            margin-right: 10px;
+            font-size: 16px;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .search-box button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #f39c12;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-box button:hover {
+            background-color: #e67e22;
+        }
+
+        .hamburger-menu {
+            font-size: 24px;
+            cursor: pointer;
+            margin-left: auto;
+            padding-right: 20px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #001f3f;
+            min-width: 160px;
+            z-index: 1;
+            top: 40px;
+            right: 0;
+            padding: 10px;
+            border-radius: 20px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 8px 12px;
+            display: block;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f39c12;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .category-options {
+            padding: 20px;
+            display: flex;
+            justify-content: center; /* Center align the category */
+            align-items: center; /* Center align vertically */
+            height: 100vh;
+        }
+
+        
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .category {
+                height: 70vh; /* Adjust height for smaller screens */
+                padding: 15px; /* Adjust padding for smaller screens */
+            }
+        }
+
+        .category {
+            background-image: url(des.jpg);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%; /* Adjust width to a percentage for responsiveness */
+            max-width: 1200px; /* Limit maximum width */
+            height: auto; /* Set height to auto for dynamic content */
+            margin-top: 140px; /* Adjust margin for positioning */
+            margin-bottom: 80px;
+            position: relative;
+            z-index: 0;
+            overflow: hidden; /* Hide overflow to contain child elements */
+        }
+
+        .outlets {
+            display: flex;
+            flex-direction: column; /* Stack outlets vertically */
+            justify-content: center;
+            background: linear-gradient(to bottom right, #f8f9fa, #e9ecef); /* Gradient background */
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            padding: 15px; /* Reduced padding */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            font-size: 14px; /* Reduced font size */
+            transition: all 0.3s ease;
+            max-width: 800px; /* Set max-width to 100% to respect parent width */
+            width : 100%;
+            margin: 0 auto;
+            /*overflow: hidden;  Hide overflow to contain child elements */
+        }
+
+        .outlet {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px; /* Adjusted margin between outlets */
+            padding: 10px; /* Added padding to outlets */
+            border-radius: 5px;
+            background-color: #fff; /* Added background color to outlets */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added box-shadow to outlets */
+        }
+
+        .outlet-info {
+            flex-grow: 1;
+            padding-left: 10px; /* Reduced padding */
+        }
+
+        .outlet-info p {
+            margin: 0; /* Removed bottom margin */
+        }
+
+        .outlet-info strong {
+            font-weight: bold;
+        }
+
+        .outlet-info a {
+            color: blue;
+            text-decoration: underline;
+        }
+
+        .outlet-info a:hover {
+            text-decoration: none;
+        }
+
+
+        /* Center text inside .category */
+        .category h1 {
+            font-size: 40px;
+            font-weight: bold;
+            color: #f39c12;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+
+        .category h1 {
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #f39c12; /* Dark text color */
+            text-align: center;
+        }
+
+        .outlets:hover {
+            transform: translateY(-3px); /* Move the box slightly up on hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+        }
+
+
+
+        .footer {
+            background-color: #001f3f;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            position: fixed; /* Change position to absolute */
+            bottom: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        /* Adjusted homepage icon */
+        .homepage-icon {
+            font-size: 40px; /* Increased font size */
+            color: #f39c12;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        /* Added rule for home button opacity on hover */
+        .homepage-icon:hover {
+            opacity: 0.7; /* Adjust the opacity value as needed */
+        }
+
+
+        .about-container {
+            max-width: 800px;
+            margin: 150px auto;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .about-container h2 {
+            font-size: 42px;
+            font-weight: 900;
+            color: #001f3f;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle text shadow */
+            line-height: 1.2; /* Adjust line height for better readability */
+            letter-spacing: 0.5px; /* Add letter spacing for emphasis */
+            text-transform: uppercase; /* Convert text to uppercase */
+        }
+
+        .developer-info {
+            font-family: 'Arial', sans-serif;
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .developer-info p {
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .developer-info b {
+            color: #001f3f;
+            font-weight: 900;
+        }
+
+        .social-links {
+            margin-bottom: 15px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .social-links img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links img:hover {
+            transform: scale(1.1);
+        }
+
+        .developer-info a {
+            color: #0352a7;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .developer-info a:hover {
+            color: #012449;
+        }
+
+
+
+        .developer-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            display : block;
+        }
+
+        .developer-photo:hover {
+            transform: scale(1.1);
+        }
+
+        /* Highlighted text effect */
+        .highlight {
+            background-color: #ffed4a; /* Yellow background for highlighted text */
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #333; /* Dark text color */
+        }
+              
+        body{
+            position: relative;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center; /* Center items vertically within the flex container */
+            justify-content: center; /* Center items horizontally within the flex container */
+        }
+
+        #searchInput {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            flex: 1;
+            margin-right: 10px; /* Add spacing between input and button */
+        }
+
+        #searchButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #f39c12;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Styles for the suggestion list */
+        .suggestions {
+            position: absolute;
+            top: calc(100% + 5px); /* Position just below the search box */
+            left: 50%; /* Center the suggestion box horizontally */
+            transform: translateX(-50%); /* Adjust to center based on its own width */
+            width: 300px;
+            max-width: calc(100% - 40px); /* Ensure maximum width matches the parent container */
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: none; /* Initially hidden */
+            z-index: 1000;
+        }
+
+        /* Adjusted CSS for suggestion list links */
+        .suggestions a {
+            display: block;
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Hover effect for suggestion list links */
+        .suggestions a:hover {
+            background-color: #f5f5f5;
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="welcome.html" class="homepage-icon">&#8962;</a>
+            <div class="logo">RGIPT Connect</div>
+            <div class="search-box">
+                <input id="searchInput" type="text" placeholder="Search...">
+                <button id="searchButton" type="button">Search</button>
+                <div id="suggestionList" class="suggestions"></div>
+            </div>
+            <div class="dropdown">
+                <div class="hamburger-menu">&#9776;</div>
+                <div class="dropdown-content">
+                    <a href="#">About Us</a>
+                    <a href="mailto:22mc3001@rgipt.ac.in">Feedback</a>
+                    <a href="#" id="logoutLink">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="category-options">
+        <div class="category">
+            <h1>About Us - RGIPT Connect</h1>
+            <div class="outlets">
+                    <img src="abjt.jpg" alt="Abhijeet Parashar" class="developer-photo">
+                    <div class="developer-info">
+                        <p><b>Welcome to RGIPT Connect, The ultimate local guide for RGIPT Community !</b></p>
+                        <p>"Developed by Abhijeet Parashar to create our very own Directory, focused on essential local places. Abhijeet is passionate about Data Analytics, Machine Learning, Business Analytics, and Finance."</p>
+                        <div class="social-links">
+                            <a href="https://www.instagram.com/abjt_421/" target="_blank"><img src="https://img.icons8.com/fluency/48/000000/instagram-new.png" alt="Instagram"></a>
+                            <a href="https://www.linkedin.com/in/abhijeet-parashar-066837254/" target="_blank"><img src="https://img.icons8.com/color/48/000000/linkedin.png" alt="LinkedIn"></a>
+                        </div>
+                        <p><strong>Email:</strong> <a href="mailto:22mc3001@rgipt.ac.in">22mc3001@rgipt.ac.in</a></p>
+                        <p><strong>Phone:</strong> <a href="tel:+916201131013">+91 - 6201131013</a></p>
+                    </div>                    
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2024 RGIPT Connect. All rights reserved.
+    </div>
+
+    <script>
+        // Function to handle search functionality
+        document.getElementById("searchButton").addEventListener("click", function() {
+            const searchTerm = document.getElementById("searchInput").value;
+            // Placeholder functionality - You can replace this with actual search functionality
+            alert(`Searching for "${searchTerm}"...`);
+        });
+    </script>
+    <!--Write Above-->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>
+
+    <script src="firebase.js"></script>
+    <script src="welcome.js"></script>
+    <script src="search.js"></script>
+</body>
+</html>
